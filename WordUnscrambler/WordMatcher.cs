@@ -8,25 +8,39 @@ namespace WordUnscrambler
 {
     class WordMatcher
     {
-        public List<MatchedWord> Match(string[] scrambledWords, string[] wordlist)
+        public List<MatchedWord> Match(string[] scrambledWords, string[] wordList)
         {
-            List<MatchedWord> matchedWords = new List<MatchedWord>();
+            var matchedwords = new List<MatchedWord>();
+
             foreach (string scrambledWord in scrambledWords)
             {
-                foreach (string word in wordlist)
+                foreach (string word in wordList)
                 {
                     if (scrambledWord.Equals(word, StringComparison.OrdinalIgnoreCase))
                     {
-                        // matchedWords.Add(BuildMatchedWord(scrambledWord, word));
-                        matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
+                        matchedwords.Add(BuildMatchedWord(scrambledWord, word));
                     }
                     else
                     {
+                        var scrambledWordList = scrambledWord.ToCharArray();
+                        var array = word.ToCharArray();
 
+                        Array.Sort(scrambledWordList);
+                        Array.Sort(array);
+
+                        var sortedScrambledWord = new string(scrambledWordList);
+                        var sortedWord = new string(array);
+
+                        if (sortedScrambledWord.Equals(sortedWord, StringComparison.OrdinalIgnoreCase))
+                        {
+                            matchedwords.Add(BuildMatchedWord(scrambledWord, word));
+                        }
                     }
                 }
+
             }
-            return null;
+
+            return matchedwords;
         }
         MatchedWord BuildMatchedWord(String scrambledWord, string word)
         {

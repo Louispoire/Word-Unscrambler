@@ -9,6 +9,7 @@ namespace WordUnscrambler
 {
     class Program
     {
+        
         private static FileReader fileReader = new FileReader();
         private static readonly WordMatcher wordMatcher = new WordMatcher();
 
@@ -55,8 +56,6 @@ namespace WordUnscrambler
                 Console.WriteLine("Loading...");
                 Thread.Sleep(2000);
                 Console.WriteLine("Shutdown in process.");
-
-
             }
 
 
@@ -67,19 +66,33 @@ namespace WordUnscrambler
             string fileName = Console.ReadLine();
             string[] scrambledWords = fileReader.read(fileName);
             DisplayMatchedScrambledWords(scrambledWords);
+
         }
 
         private static void ExecuteScrambledWordsManualEntryScenario()
         {
-            //Get user input comma separated string conating scrambled words
-            //use .split
+            var scrambledList = @"C:\Users\lpsim\source\repos\Word-Unscrambler\WordUnscrambler\scrambledWords.txt";
+            var wordList = @"C:\Users\lpsim\source\repos\Word-Unscrambler\WordUnscrambler\wordList.txt";
+            string enteredWord = Console.ReadLine();
+            string[] list = fileReader.read(wordList);
+            string[] array = enteredWord.Split(',');
+            wordMatcher.Match(array, list);
+            int i = 1;
+            foreach (string value in array)
+            {
+                Console.WriteLine(i + $": {value}");
+            }
             
+            
+
         }
         private static void DisplayMatchedScrambledWords(string[] scrambledWords)
         {
             string[] wordlist = fileReader.read(@"wordlist.txt"); //put a constant file. CAPITAL LETTERS. READ ONLY
             List<MatchedWord> matchedWords = wordMatcher.Match(scrambledWords, wordlist);
 
+
+           
             //Display the matches... use foreach with the list (matchedWords)
             //Rule: use a formatter to display ex: {0}{1}
             //Rule: use a IF to determine if matchedWords is empty or not.......
@@ -87,5 +100,6 @@ namespace WordUnscrambler
             //              if NOT empty - display the matches.... use "foreach" to display every match
 
         }
+        
     }
 }
