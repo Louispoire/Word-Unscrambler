@@ -22,16 +22,13 @@ namespace WordUnscrambler
                     }
                     else
                     {
-                        var scrambledWordList = scrambledWord.ToCharArray();
-                        var array = word.ToCharArray();
-
+                        var scrambledWordList = scrambledWord.ToArray();
+                        var array = word.ToArray();
                         Array.Sort(scrambledWordList);
                         Array.Sort(array);
-
-                        var sortedScrambledWord = new string(scrambledWordList);
-                        var sortedWord = new string(array);
-
-                        if (sortedScrambledWord.Equals(sortedWord, StringComparison.OrdinalIgnoreCase))
+                        string sortedScrambledWord = new string(scrambledWordList);
+                        string word2 = new string(array);
+                        if (sortedScrambledWord.Equals(word2, StringComparison.OrdinalIgnoreCase))
                         {
                             matchedwords.Add(BuildMatchedWord(scrambledWord, word));
                         }

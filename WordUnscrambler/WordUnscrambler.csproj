@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scrambledWords.txt" />
+    <Content Include="README.txt" />
     <Content Include="wordlist.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

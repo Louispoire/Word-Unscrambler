@@ -12,20 +12,8 @@ namespace WordUnscrambler
 
         public string[] read(string filename)
         {
-
-            string[] file;
-            try
-            {
-                file = File.ReadAllLines(filename);
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
+            string[] file = File.ReadAllLines(filename);
             return file;
-
         }
 
     }
